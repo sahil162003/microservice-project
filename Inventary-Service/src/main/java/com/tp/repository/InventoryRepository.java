@@ -1,0 +1,7 @@
+package com.tp.repository;
+
+import com.tp.entity.Inventory;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface InventoryRepository extends JpaRepository<Inventory,Long> {
+}

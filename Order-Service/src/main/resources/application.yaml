@@ -1,0 +1,63 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: Order-Service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/order_db?createDatabaseIfNotExist=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  http:
+    client:
+      connect-timeout: 5000
+      read-timeout: 5000
+
+  retry:
+    enabled: true
+
+# ================================
+# FEIGN CLIENT CONFIG
+# ================================
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+
+# ================================
+# RETRY CONFIG
+# ================================
+resilience4j:
+  retry:
+    instances:
+      default:
+        maxAttempts: 3
+        waitDuration: 1s
+
+# ================================
+# EUREKA
+# ================================
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
